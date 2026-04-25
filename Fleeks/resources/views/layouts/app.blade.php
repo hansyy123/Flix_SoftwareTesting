@@ -14,18 +14,20 @@
         <!-- Scripts -->
         @if (file_exists(public_path('build/manifest.json')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
+            {{-- Ensure Alpine is available for dropdowns/modals even if Vite build doesn't include it. --}}
+            <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         @else
             <script src="https://cdn.tailwindcss.com"></script>
             <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         @endif
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <body class="font-sans antialiased bg-[#070a12] text-white">
+        <div class="min-h-screen bg-[#070a12] text-white">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-white shadow">
+                <header class="border-b border-white/10 bg-white/5 backdrop-blur-xl">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>

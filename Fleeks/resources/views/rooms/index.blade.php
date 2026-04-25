@@ -20,7 +20,7 @@
                     <a href="{{ route('rooms.show', $room) }}" class="block bg-white overflow-hidden rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition">
                         <div class="aspect-[16/9] bg-gray-50 border-b border-gray-100 overflow-hidden">
                             <img
-                                src="{{ $room->image_path ?: '/images/rooms/room-01.svg' }}"
+                                src="{{ $room->image_path ?: '/images/rooms/room1.jpg' }}"
                                 alt="{{ $room->name }}"
                                 class="w-full h-full object-cover"
                                 loading="lazy"

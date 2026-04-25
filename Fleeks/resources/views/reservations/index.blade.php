@@ -2,12 +2,12 @@
     <x-slot name="header">
         <div class="flex items-center justify-between gap-4">
             <div>
-                <h2 class="font-semibold text-xl text-gray-900 leading-tight">
+                <h2 class="font-semibold text-xl text-white leading-tight">
                     {{ __('My reservations') }}
                 </h2>
-                <p class="mt-1 text-sm text-gray-600">Track your reservation and approval status.</p>
+                <p class="mt-1 text-sm text-white/60">Track your reservation and approval status.</p>
             </div>
-            <a href="{{ route('dashboard') }}" class="inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-md text-sm font-medium hover:bg-gray-800">
+            <a href="{{ route('dashboard') }}" class="inline-flex items-center px-4 py-2 bg-indigo-500 hover:bg-indigo-400 text-white rounded-xl text-sm font-medium transition shadow-lg shadow-indigo-500/20">
                 Reserve another room
             </a>
         </div>
@@ -16,8 +16,8 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             @if (session('status'))
-                <div class="bg-white shadow-sm sm:rounded-lg">
-                    <div class="p-4 text-sm text-gray-700">
+                <div class="bg-white/5 ring-1 ring-white/10 shadow-2xl sm:rounded-2xl backdrop-blur-xl">
+                    <div class="p-4 text-sm text-white/80">
                         {{ session('status') }}
                     </div>
                 </div>
@@ -27,18 +27,18 @@
                 @forelse ($reservations as $reservation)
                     @php
                         $statusClasses = match ($reservation->status) {
-                            'approved' => 'bg-green-50 text-green-800 ring-green-600/20',
-                            'rejected' => 'bg-red-50 text-red-800 ring-red-600/20',
-                            'cancelled' => 'bg-gray-50 text-gray-800 ring-gray-600/20',
-                            default => 'bg-yellow-50 text-yellow-800 ring-yellow-600/20',
+                            'approved' => 'bg-emerald-500/15 text-emerald-200 ring-emerald-400/20',
+                            'rejected' => 'bg-red-500/15 text-red-200 ring-red-400/20',
+                            'cancelled' => 'bg-white/10 text-white/80 ring-white/15',
+                            default => 'bg-amber-500/15 text-amber-200 ring-amber-400/20',
                         };
                     @endphp
-                    <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                    <div class="bg-white/5 rounded-2xl border border-white/10 shadow-2xl overflow-hidden backdrop-blur-xl">
                         <div class="p-5 space-y-4">
                             <div class="flex items-start justify-between gap-4">
                                 <div>
-                                    <div class="text-sm text-gray-500">Room</div>
-                                    <div class="text-base font-semibold text-gray-900">{{ $reservation->room?->name ?? '—' }}</div>
+                                    <div class="text-sm text-white/60">Room</div>
+                                    <div class="text-base font-semibold text-white">{{ $reservation->room?->name ?? '—' }}</div>
                                 </div>
                                 <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ring-1 ring-inset {{ $statusClasses }}">
                                     {{ ucfirst($reservation->status) }}
@@ -47,37 +47,37 @@
 
                             <div class="grid grid-cols-1 gap-3 text-sm">
                                 <div>
-                                    <div class="text-gray-500">Movie</div>
-                                    <div class="font-medium text-gray-900">{{ $reservation->movie_title ?? '—' }}</div>
+                                    <div class="text-white/60">Movie</div>
+                                    <div class="font-medium text-white">{{ $reservation->movie_title ?? '—' }}</div>
                                 </div>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                     <div>
-                                        <div class="text-gray-500">Start</div>
-                                        <div class="font-medium text-gray-900">{{ $reservation->starts_at?->format('Y-m-d H:i') }}</div>
+                                        <div class="text-white/60">Start</div>
+                                        <div class="font-medium text-white">{{ $reservation->starts_at?->format('Y-m-d H:i') }}</div>
                                     </div>
                                     <div>
-                                        <div class="text-gray-500">End</div>
-                                        <div class="font-medium text-gray-900">{{ $reservation->ends_at?->format('Y-m-d H:i') }}</div>
+                                        <div class="text-white/60">End</div>
+                                        <div class="font-medium text-white">{{ $reservation->ends_at?->format('Y-m-d H:i') }}</div>
                                     </div>
                                 </div>
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <div class="text-gray-500">Payment</div>
-                                        <div class="font-medium text-gray-900">{{ str_replace('_', ' ', $reservation->payment_method) }}</div>
+                                        <div class="text-white/60">Payment</div>
+                                        <div class="font-medium text-white">{{ str_replace('_', ' ', $reservation->payment_method) }}</div>
                                     </div>
                                 </div>
                                 @if ($reservation->admin_note)
-                                    <div class="rounded-lg bg-gray-50 border border-gray-100 p-3">
-                                        <div class="text-gray-500 text-xs font-medium">Admin note</div>
-                                        <div class="text-gray-800 text-sm mt-1">{{ $reservation->admin_note }}</div>
+                                    <div class="rounded-xl bg-white/5 border border-white/10 p-3">
+                                        <div class="text-white/60 text-xs font-medium">Admin note</div>
+                                        <div class="text-white text-sm mt-1">{{ $reservation->admin_note }}</div>
                                     </div>
                                 @endif
                             </div>
                         </div>
                     </div>
                 @empty
-                    <div class="col-span-full bg-white rounded-xl border border-gray-100 shadow-sm">
-                        <div class="p-6 text-gray-700">
+                    <div class="col-span-full bg-white/5 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-xl">
+                        <div class="p-6 text-white/70">
                             No reservations yet.
                         </div>
                     </div>

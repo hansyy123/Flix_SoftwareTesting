@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Cozy private room with a large screen and premium sound — great for small groups.',
                 'capacity' => 6,
                 'price_per_hour' => 500,
-                'image_path' => '/images/rooms/room-01.svg',
+                'image_path' => '/images/rooms/room-01.png',
                 'is_active' => true,
             ],
             [
@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Sofas + ambient lighting + enhanced audio for a premium watch experience.',
                 'capacity' => 10,
                 'price_per_hour' => 900,
-                'image_path' => '/images/rooms/room-02.svg',
+                'image_path' => '/images/rooms/room-02.png',
                 'is_active' => true,
             ],
             [
@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Bigger capacity room built for barkada movie nights.',
                 'capacity' => 20,
                 'price_per_hour' => 1500,
-                'image_path' => '/images/rooms/room-03.svg',
+                'image_path' => '/images/rooms/room-03.png',
                 'is_active' => true,
             ],
             [
@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Small, intimate room for two — perfect for dates and chill nights.',
                 'capacity' => 2,
                 'price_per_hour' => 350,
-                'image_path' => '/images/rooms/room-01.svg',
+                'image_path' => '/images/rooms/room-04.png',
                 'is_active' => true,
             ],
             [
@@ -75,7 +75,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Comfortable seating and kid-friendly setup for family screenings.',
                 'capacity' => 8,
                 'price_per_hour' => 650,
-                'image_path' => '/images/rooms/room-02.svg',
+                'image_path' => '/images/rooms/room-05.png',
                 'is_active' => true,
             ],
             [
@@ -83,7 +83,23 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Simple, clean, and affordable — still a solid screen + sound.',
                 'capacity' => 4,
                 'price_per_hour' => 300,
-                'image_path' => '/images/rooms/room-03.svg',
+                'image_path' => '/images/rooms/room-06.png',
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Dolby Dark Room',
+                'description' => 'Dark, immersive vibe with punchy bass and crisp dialogue.',
+                'capacity' => 6,
+                'price_per_hour' => 750,
+                'image_path' => '/images/rooms/room-07.png',
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Classic Home Theater',
+                'description' => 'Warm, homey setup that feels like your own living room cinema.',
+                'capacity' => 5,
+                'price_per_hour' => 450,
+                'image_path' => '/images/rooms/room-08.png',
                 'is_active' => true,
             ],
         ];
