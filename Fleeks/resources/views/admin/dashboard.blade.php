@@ -8,9 +8,6 @@
                 <p class="mt-1 text-sm text-white/60">Manage accounts, rooms, and reservations.</p>
             </div>
             <div class="flex items-center gap-2">
-                <a href="{{ route('admin.users.pending') }}" class="inline-flex items-center px-4 py-2 bg-white/5 border border-white/15 rounded-xl text-sm font-medium text-white/80 hover:bg-white/10">
-                    Pending users
-                </a>
                 <a href="{{ route('admin.reservations.pending') }}" class="inline-flex items-center px-4 py-2 bg-indigo-500 hover:bg-indigo-400 text-white rounded-xl text-sm font-medium transition shadow-lg shadow-indigo-500/20">
                     Pending reservations
                 </a>
@@ -28,12 +25,7 @@
                 </div>
             @endif
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <a href="{{ route('admin.users.pending') }}" class="bg-white/5 rounded-2xl p-6 border border-white/10 shadow-2xl hover:shadow-indigo-500/10 transition backdrop-blur-xl">
-                    <div class="text-sm text-white/60">Pending users</div>
-                    <div class="mt-2 text-3xl font-semibold text-white">{{ $pending_users }}</div>
-                    <div class="mt-4 text-sm font-medium text-indigo-200">Review accounts →</div>
-                </a>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <a href="{{ route('admin.reservations.pending') }}" class="bg-white/5 rounded-2xl p-6 border border-white/10 shadow-2xl hover:shadow-indigo-500/10 transition backdrop-blur-xl">
                     <div class="text-sm text-white/60">Pending reservations</div>
                     <div class="mt-2 text-3xl font-semibold text-white">{{ $pending_reservations }}</div>

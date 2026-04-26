@@ -12,18 +12,6 @@ class ApprovalAndReservationsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_unapproved_users_are_redirected_to_pending_approval(): void
-    {
-        $user = User::factory()->create([
-            'role' => 'user',
-            'account_status' => 'pending',
-        ]);
-
-        $this->actingAs($user)
-            ->get(route('dashboard'))
-            ->assertRedirect(route('approval.pending'));
-    }
-
     public function test_overlapping_reservation_is_rejected(): void
     {
         $room = Room::factory()->create();

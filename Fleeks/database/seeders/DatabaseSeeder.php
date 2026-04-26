@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Sample User',
                 'password' => Hash::make('user12345'),
                 'role' => 'user',
-                'account_status' => 'pending',
+                'account_status' => 'approved',
             ]
         );
 

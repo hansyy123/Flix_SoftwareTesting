@@ -14,22 +14,15 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     @php
                         $user = Auth::user();
-                        $isApproved = ($user->account_status ?? 'pending') === 'approved';
                         $isAdmin = ($user->role ?? 'user') === 'admin';
                     @endphp
 
-                    @if ($isApproved)
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Rooms') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
-                            {{ __('My reservations') }}
-                        </x-nav-link>
-                    @else
-                        <x-nav-link :href="route('approval.pending')" :active="request()->routeIs('approval.pending')">
-                            {{ __('Approval') }}
-                        </x-nav-link>
-                    @endif
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('Rooms') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
+                        {{ __('My reservations') }}
+                    </x-nav-link>
 
                     @if ($isAdmin)
                         <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.*')">
@@ -83,22 +76,15 @@
         <div class="pt-2 pb-3 space-y-1">
             @php
                 $user = Auth::user();
-                $isApproved = ($user->account_status ?? 'pending') === 'approved';
                 $isAdmin = ($user->role ?? 'user') === 'admin';
             @endphp
 
-            @if ($isApproved)
-                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('Rooms') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
-                    {{ __('My reservations') }}
-                </x-responsive-nav-link>
-            @else
-                <x-responsive-nav-link :href="route('approval.pending')" :active="request()->routeIs('approval.pending')">
-                    {{ __('Approval') }}
-                </x-responsive-nav-link>
-            @endif
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                {{ __('Rooms') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
+                {{ __('My reservations') }}
+            </x-responsive-nav-link>
 
             @if ($isAdmin)
                 <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.*')">

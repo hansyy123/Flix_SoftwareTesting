@@ -60,7 +60,7 @@
                                 Your personal cinema, on your schedule.
                             </div>
                             <p class="mt-4 text-white/70 text-base leading-relaxed">
-                                Choose a room, enter the movie you want to watch, and submit a reservation request. Admins approve accounts and validate schedules to prevent conflicts.
+                                Choose a room, enter the movie you want to watch, and submit a reservation request. Admins validate schedules to prevent conflicts.
                             </p>
 
                             <div class="mt-8 grid grid-cols-3 gap-4">
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
                                     <div class="text-sm text-white/70">Step 2</div>
-                                    <div class="mt-1 font-semibold">Get approved</div>
+                                    <div class="mt-1 font-semibold">Pick a room</div>
                                 </div>
                                 <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
                                     <div class="text-sm text-white/70">Step 3</div>

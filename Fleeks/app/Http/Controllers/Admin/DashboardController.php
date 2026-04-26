@@ -12,7 +12,6 @@ class DashboardController extends Controller
     public function __invoke()
     {
         return view('admin.dashboard', [
-            'pending_users' => User::query()->where('account_status', 'pending')->count(),
             'pending_reservations' => Reservation::query()->where('status', 'pending')->count(),
             'rooms' => Room::query()->count(),
         ]);

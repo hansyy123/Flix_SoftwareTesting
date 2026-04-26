@@ -12,7 +12,6 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
-            'approved' => \App\Http\Middleware\EnsureAccountApproved::class,
             'admin' => \App\Http\Middleware\EnsureIsAdmin::class,
         ]);
     })

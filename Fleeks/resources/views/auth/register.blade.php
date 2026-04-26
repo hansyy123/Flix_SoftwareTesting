@@ -2,7 +2,7 @@
     <div class="space-y-6" x-data="{ show1: false, show2: false }">
         <div class="text-center">
             <h1 class="text-2xl font-semibold tracking-tight text-white">Create your account</h1>
-            <p class="mt-1 text-sm text-white/70">Register now. Admin approval is required before reservations.</p>
+            <p class="mt-1 text-sm text-white/70">Register now to start reserving rooms.</p>
         </div>
 
         <form method="POST" action="{{ route('register') }}" class="space-y-4">
