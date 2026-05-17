@@ -7,7 +7,7 @@
                 </h2>
                 <p class="mt-1 text-sm text-white/60">Reserve this room for the movie you want to watch.</p>
             </div>
-            <a href="{{ route('rooms.index') }}" class="inline-flex items-center px-4 py-2 bg-white/5 border border-white/15 rounded-xl text-sm font-medium text-white/80 hover:bg-white/10">
+            <a href="{{ route('dashboard') }}" class="inline-flex items-center px-4 py-2 bg-white/5 border border-white/15 rounded-xl text-sm font-medium text-white/80 hover:bg-white/10">
                 Back to rooms
             </a>
         </div>
@@ -45,11 +45,15 @@
 
             <div class="bg-white/5 overflow-hidden rounded-2xl border border-white/10 shadow-2xl backdrop-blur-xl">
                 <div class="p-6">
-                    <h3 class="text-base font-semibold text-white">Request a reservation</h3>
-                    <p class="mt-1 text-sm text-white/60">Describe what you want to say to the owner and your preferred schedule.</p>
+                    @if ((auth()->user()->role ?? 'user') === 'admin')
+                        <h3 class="text-base font-semibold text-white">Room details only</h3>
+                        <p class="mt-1 text-sm text-white/60">Admins can view room details here, but cannot submit reservations.</p>
+                    @else
+                        <h3 class="text-base font-semibold text-white">Request a reservation</h3>
+                        <p class="mt-1 text-sm text-white/60">Describe what you want to say to the owner and your preferred schedule.</p>
 
-                    <form method="POST" action="{{ route('rooms.reservations.store', $room) }}" enctype="multipart/form-data" class="mt-4 space-y-4">
-                        @csrf
+                        <form method="POST" action="{{ route('rooms.reservations.store', $room) }}" enctype="multipart/form-data" class="mt-4 space-y-4">
+                            @csrf
 
                         @php
                             $movies = config('app.movies');
@@ -73,7 +77,7 @@
                         <div x-data="{ selectedMovie: @json($selectedMovie) }">
                             <x-input-label for="movie_title" value="Movie selection" />
 
-                            <select id="movie_title" name="movie_title" x-model="selectedMovie" class="mt-1 block w-full rounded-xl bg-white/10 border border-white/15 text-white focus:border-indigo-400 focus:ring-indigo-400 shadow-sm" required>
+<select id="movie_title" name="movie_title" x-model="selectedMovie" class="mt-1 block w-full rounded-xl bg-[#111827] border border-white/15 text-white focus:border-indigo-400 focus:ring-indigo-400 shadow-sm hover:border-white/20 transition" required>
                                 <option value="" disabled {{ $selectedMovie === '' ? 'selected' : '' }}>Select a movie or choose Other</option>
                                 @foreach ($movies as $movie)
                                     <option value="{{ $movie }}" {{ $selectedMovie === $movie ? 'selected' : '' }}>{{ $movie }}</option>
@@ -105,7 +109,7 @@
 
                         <div>
                             <x-input-label for="payment_method" value="Payment method" />
-                            <select id="payment_method" name="payment_method" class="mt-1 block w-full rounded-xl bg-white/10 border border-white/15 text-white focus:border-indigo-400 focus:ring-indigo-400 shadow-sm" required>
+                            <select id="payment_method" name="payment_method" class="mt-1 block w-full rounded-xl bg-[#111827] border border-white/15 text-white focus:border-indigo-400 focus:ring-indigo-400 shadow-sm hover:border-white/20 transition" required>
                                 <option value="" disabled {{ old('payment_method') ? '' : 'selected' }}>Select...</option>
                                 <option value="cash" {{ old('payment_method') === 'cash' ? 'selected' : '' }}>Cash</option>
                                 <option value="gcash" {{ old('payment_method') === 'gcash' ? 'selected' : '' }}>GCash</option>
@@ -126,6 +130,7 @@
                             </button>
                         </div>
                     </form>
+                    @endif
                 </div>
             </div>
         </div>

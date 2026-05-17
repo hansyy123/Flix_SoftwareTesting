@@ -20,9 +20,12 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Rooms') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
-                        {{ __('My reservations') }}
-                    </x-nav-link>
+
+                    @unless ($isAdmin)
+                        <x-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
+                            {{ __('My reservations') }}
+                        </x-nav-link>
+                    @endunless
 
                     @if ($isAdmin)
                         <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.*')">
@@ -73,49 +76,52 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            @php
-                $user = Auth::user();
-                $isAdmin = ($user->role ?? 'user') === 'admin';
-            @endphp
+            <div class="pt-2 pb-3 space-y-1">
+                @php
+                    $user = Auth::user();
+                    $isAdmin = ($user->role ?? 'user') === 'admin';
+                @endphp
 
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Rooms') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
-                {{ __('My reservations') }}
-            </x-responsive-nav-link>
-
-            @if ($isAdmin)
-                <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.*')">
-                    {{ __('Admin') }}
-                </x-responsive-nav-link>
-            @endif
-        </div>
-
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-white/10">
-            <div class="px-4">
-                <div class="font-medium text-base text-white">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-white/60">{{ Auth::user()->email }}</div>
-            </div>
-
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{ __('Rooms') }}
                 </x-responsive-nav-link>
 
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                @unless ($isAdmin)
+                    <x-responsive-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
+                        {{ __('My reservations') }}
                     </x-responsive-nav-link>
-                </form>
+                @endunless
+
+                @if ($isAdmin)
+                    <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.*')">
+                        {{ __('Admin') }}
+                    </x-responsive-nav-link>
+                @endif
             </div>
+
+            <!-- Responsive Settings Options -->
+            <div class="pt-4 pb-1 border-t border-white/10">
+                <div class="px-4">
+                    <div class="font-medium text-base text-white">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-sm text-white/60">{{ Auth::user()->email }}</div>
+                </div>
+
+                <div class="mt-3 space-y-1">
+                    <x-responsive-nav-link :href="route('profile.edit')">
+                        {{ __('Profile') }}
+                    </x-responsive-nav-link>
+
+                    <!-- Authentication -->
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <x-responsive-nav-link :href="route('logout')"
+                                onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                            {{ __('Log Out') }}
+                        </x-responsive-nav-link>
+                    </form>
+                </div>
         </div>
     </div>
 </nav>

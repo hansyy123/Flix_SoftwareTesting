@@ -25,7 +25,7 @@
                 </div>
             @endif
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <a href="{{ route('admin.reservations.pending') }}" class="bg-white/5 rounded-2xl p-6 border border-white/10 shadow-2xl hover:shadow-indigo-500/10 transition backdrop-blur-xl">
                     <div class="text-sm text-white/60">Pending reservations</div>
                     <div class="mt-2 text-3xl font-semibold text-white">{{ $pending_reservations }}</div>
@@ -36,7 +36,39 @@
                     <div class="mt-2 text-3xl font-semibold text-white">{{ $rooms }}</div>
                     <div class="mt-4 text-sm font-medium text-indigo-200">Manage rooms →</div>
                 </a>
+                <div class="bg-white/5 rounded-2xl p-6 border border-white/10 shadow-2xl hover:shadow-indigo-500/10 transition backdrop-blur-xl">
+                    <div class="text-sm text-white/60">Cancelled reservations</div>
+                    <div class="mt-2 text-3xl font-semibold text-white">{{ $cancelled_reservations }}</div>
+                    <div class="mt-4 text-sm font-medium text-indigo-200">Recent cancellations →</div>
+                </div>
             </div>
+
+            @if ($recent_cancellations->isNotEmpty())
+                <div class="bg-white/5 overflow-hidden rounded-2xl border border-white/10 shadow-2xl backdrop-blur-xl">
+                    <div class="p-6">
+                        <div class="text-sm text-white/60">Latest cancellations</div>
+                        <div class="mt-4 space-y-4">
+                            @foreach ($recent_cancellations as $reservation)
+                                <div class="rounded-2xl bg-[#0b1220]/80 border border-white/10 p-4">
+                                    <div class="flex items-center justify-between gap-4">
+                                        <div>
+                                            <div class="text-sm text-white/60">{{ $reservation->room?->name ?? 'Room' }}</div>
+                                            <div class="text-white font-semibold">{{ $reservation->user?->name ?? 'Unknown user' }}</div>
+                                        </div>
+                                        <span class="text-xs uppercase tracking-[0.2em] text-rose-300">Cancelled</span>
+                                    </div>
+                                    <div class="mt-3 text-sm text-white/70">
+                                        {{ $reservation->starts_at?->format('Y-m-d H:i') }} → {{ $reservation->ends_at?->format('Y-m-d H:i') }}
+                                    </div>
+                                    <div class="mt-3 text-xs text-white/50">
+                                        {{ $reservation->admin_note ?? 'Cancelled by user' }}
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </x-app-layout>

@@ -16,12 +16,15 @@ class ApprovalAndReservationsTest extends TestCase
     {
         $room = Room::factory()->create();
 
+        $existingMovie = config('app.movies')[0] ?? 'Avatar';
+        $newMovie = config('app.movies')[1] ?? 'Spider-Man: Across the Spider-Verse';
+
         Reservation::factory()->create([
             'room_id' => $room->id,
             'status' => 'approved',
             'starts_at' => now()->addDays(3)->setTime(10, 0),
             'ends_at' => now()->addDays(3)->setTime(12, 0),
-            'movie_title' => 'Existing Movie',
+            'movie_title' => $existingMovie,
         ]);
 
         $user = User::factory()->create([
@@ -31,7 +34,7 @@ class ApprovalAndReservationsTest extends TestCase
 
         $this->actingAs($user)
             ->post(route('rooms.reservations.store', $room), [
-                'movie_title' => 'New Movie',
+                'movie_title' => $newMovie,
                 'starts_at' => now()->addDays(3)->setTime(11, 0)->format('Y-m-d\TH:i'),
                 'ends_at' => now()->addDays(3)->setTime(13, 0)->format('Y-m-d\TH:i'),
                 'payment_method' => 'cash',

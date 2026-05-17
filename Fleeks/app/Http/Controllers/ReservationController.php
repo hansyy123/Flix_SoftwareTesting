@@ -27,6 +27,8 @@ class ReservationController extends Controller
     {
         abort_unless($room->is_active, 404);
 
+        abort_if($request->user()->role === 'admin', 403);
+
         $startsAt = $request->date('starts_at');
         $endsAt = $request->date('ends_at');
 
@@ -69,6 +71,24 @@ class ReservationController extends Controller
                 ->route('reservations.index')
                 ->with('status', 'Reservation request submitted. Please wait for admin approval.');
         });
+    }
+
+    public function destroy(Request $request, Reservation $reservation)
+    {
+        abort_unless($request->user()->id === $reservation->user_id, 403);
+
+        if ($reservation->status === 'cancelled') {
+            return back()->with('status', 'Reservation is already cancelled.');
+        }
+
+        $reservation->forceFill([
+            'status' => 'cancelled',
+            'admin_note' => sprintf('User cancelled this reservation on %s.', now()->format('Y-m-d H:i')),
+        ])->save();
+
+        return redirect()
+            ->route('reservations.index')
+            ->with('status', 'Your reservation has been cancelled. Admins have been notified.');
     }
 }
 

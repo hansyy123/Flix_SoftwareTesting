@@ -26,11 +26,11 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
-    Route::get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
     Route::get('/rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
 
     Route::post('/rooms/{room}/reservations', [ReservationController::class, 'store'])->name('rooms.reservations.store');
     Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
+    Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
 });
 
 Route::middleware('auth')->group(function () {

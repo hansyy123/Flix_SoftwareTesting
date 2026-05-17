@@ -13,7 +13,13 @@ class DashboardController extends Controller
     {
         return view('admin.dashboard', [
             'pending_reservations' => Reservation::query()->where('status', 'pending')->count(),
+            'cancelled_reservations' => Reservation::query()->where('status', 'cancelled')->count(),
             'rooms' => Room::query()->count(),
+            'recent_cancellations' => Reservation::query()
+                ->where('status', 'cancelled')
+                ->latest('updated_at')
+                ->limit(5)
+                ->get(),
         ]);
     }
 }

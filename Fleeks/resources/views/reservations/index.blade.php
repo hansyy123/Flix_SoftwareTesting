@@ -72,6 +72,17 @@
                                         <div class="text-white text-sm mt-1">{{ $reservation->admin_note }}</div>
                                     </div>
                                 @endif
+
+                                @if ($reservation->status !== 'cancelled')
+                                    <form action="{{ route('reservations.destroy', $reservation) }}" method="POST" class="mt-4">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-red-500 hover:bg-red-400 border border-transparent rounded-xl font-semibold text-xs text-white uppercase tracking-widest transition shadow-lg shadow-red-500/20">
+                                            Cancel reservation
+                                        </button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
                     </div>

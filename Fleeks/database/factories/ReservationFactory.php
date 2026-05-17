@@ -21,6 +21,7 @@ class ReservationFactory extends Factory
         return [
             'user_id' => User::factory(),
             'room_id' => Room::factory(),
+            'movie_title' => 'Test Movie',
             'starts_at' => $startsAt,
             'ends_at' => (clone $startsAt)->addHours(2),
             'payment_method' => 'cash',
