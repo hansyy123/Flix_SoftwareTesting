@@ -60,7 +60,7 @@
                                         @if ($reservation->payment_proof_path)
                                             <a
                                                 class="text-sm font-medium text-indigo-200 hover:text-white"
-                                                href="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($reservation->payment_proof_path) }}"
+                                                href="{{ route('admin.reservations.proof', $reservation) }}"
                                                 target="_blank"
                                                 rel="noreferrer"
                                             >

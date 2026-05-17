@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">Fleeks logo</title>
+  <desc id="logoDesc">A logo with a stylized F and the application name Fleeks.</desc>
+  <rect width="280" height="70" rx="16" fill="#0b1220" />
+  <path d="M30 54L30 16L50 16C60 16 68 23.7 68 34C68 44.3 60 52 50 52L30 52" fill="#38bdf8"/>
+  <path d="M30 16L30 54L12 54L12 16L30 16Z" fill="#38bdf8"/>
+  <path d="M46 34C46 27.37 50.98 22 58 22H72V28H58C54.7 28 52 30.69 52 34C52 37.31 54.7 40 58 40H72V46H58C50.98 46 46 40.63 46 34Z" fill="#ffffff"/>
+  <text x="96" y="44" fill="#ffffff" font-family="Inter, Helvetica, Arial, sans-serif" font-size="32" font-weight="700">Fleeks</text>
+</svg>

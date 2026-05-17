@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Storage;
 class PendingReservationsController extends Controller
 {
     public function index()
@@ -72,6 +72,16 @@ class PendingReservationsController extends Controller
         ])->save();
 
         return back()->with('status', 'Reservation rejected.');
+    }
+
+    public function proof(Reservation $reservation)
+    {
+        abort_unless(
+            $reservation->payment_proof_path && Storage::disk('public')->exists($reservation->payment_proof_path),
+            404
+        );
+
+        return response()->file(Storage::disk('public')->path($reservation->payment_proof_path));
     }
 }
 

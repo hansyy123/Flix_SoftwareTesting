@@ -46,15 +46,48 @@
             <div class="bg-white/5 overflow-hidden rounded-2xl border border-white/10 shadow-2xl backdrop-blur-xl">
                 <div class="p-6">
                     <h3 class="text-base font-semibold text-white">Request a reservation</h3>
-                    <p class="mt-1 text-sm text-white/60">Enter the movie title and your preferred schedule.</p>
+                    <p class="mt-1 text-sm text-white/60">Describe what you want to say to the owner and your preferred schedule.</p>
 
                     <form method="POST" action="{{ route('rooms.reservations.store', $room) }}" enctype="multipart/form-data" class="mt-4 space-y-4">
                         @csrf
 
-                        <div>
-                            <x-input-label for="movie_title" value="Movie title" />
-                            <x-text-input id="movie_title" name="movie_title" type="text" class="mt-1 block w-full" :value="old('movie_title')" required />
+                        @php
+                            $movies = config('app.movies');
+                            $oldMovie = old('movie_title');
+                            $selectedMovie = '';
+                            $manualMovieTitle = '';
+
+                            if ($oldMovie !== null && $oldMovie !== '') {
+                                if ($oldMovie === 'other') {
+                                    $selectedMovie = 'other';
+                                    $manualMovieTitle = old('manual_movie_title', '');
+                                } elseif (in_array($oldMovie, $movies, true)) {
+                                    $selectedMovie = $oldMovie;
+                                } else {
+                                    $selectedMovie = 'other';
+                                    $manualMovieTitle = $oldMovie;
+                                }
+                            }
+                        @endphp
+
+                        <div x-data="{ selectedMovie: @json($selectedMovie) }">
+                            <x-input-label for="movie_title" value="Movie selection" />
+
+                            <select id="movie_title" name="movie_title" x-model="selectedMovie" class="mt-1 block w-full rounded-xl bg-white/10 border border-white/15 text-white focus:border-indigo-400 focus:ring-indigo-400 shadow-sm" required>
+                                <option value="" disabled {{ $selectedMovie === '' ? 'selected' : '' }}>Select a movie or choose Other</option>
+                                @foreach ($movies as $movie)
+                                    <option value="{{ $movie }}" {{ $selectedMovie === $movie ? 'selected' : '' }}>{{ $movie }}</option>
+                                @endforeach
+                                <option value="other" {{ $selectedMovie === 'other' ? 'selected' : '' }}>Other / Enter manually</option>
+                            </select>
+
                             <x-input-error class="mt-2" :messages="$errors->get('movie_title')" />
+
+                            <div x-show="selectedMovie === 'other'" x-cloak class="mt-4">
+                                <x-input-label for="manual_movie_title" value="Custom movie or note" />
+                                <x-text-input id="manual_movie_title" name="manual_movie_title" type="text" class="mt-1 block w-full" :value="old('manual_movie_title', $manualMovieTitle)" placeholder="Enter the movie title or a note for the owner" />
+                                <x-input-error class="mt-2" :messages="$errors->get('manual_movie_title')" />
+                            </div>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">

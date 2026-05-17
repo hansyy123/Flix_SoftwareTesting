@@ -50,10 +50,14 @@ class ReservationController extends Controller
                 $proofPath = $request->file('payment_proof')->store('payment_proofs', 'public');
             }
 
+            $movieTitle = $request->input('movie_title') === 'other'
+                ? $request->string('manual_movie_title')->toString()
+                : $request->string('movie_title')->toString();
+
             Reservation::create([
                 'user_id' => $request->user()->id,
                 'room_id' => $room->id,
-                'movie_title' => $request->string('movie_title')->toString(),
+                'movie_title' => $movieTitle,
                 'starts_at' => $startsAt,
                 'ends_at' => $endsAt,
                 'payment_method' => $request->string('payment_method')->toString(),

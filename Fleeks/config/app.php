@@ -15,6 +15,30 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'movies' => [
+        'Avatar: The Way of Water',
+        'Top Gun: Maverick',
+        'Barbie',
+        'Oppenheimer',
+        'Spider-Man: Across the Spider-Verse',
+        'Mission: Impossible – Dead Reckoning Part One',
+        'Guardians of the Galaxy Vol. 3',
+        'John Wick: Chapter 4',
+        'Dune: Part Two',
+        'Black Panther: Wakanda Forever',
+        'Elvis',
+        'Indiana Jones and the Dial of Destiny',
+        'Jurassic World Dominion',
+        'Fast X',
+        'The Flash',
+        'Wicked (Coming Soon)',
+        'Gladiator 2 (Coming Soon)',
+        'Deadpool 3 (Coming Soon)',
+        'Aquaman and the Lost Kingdom (Coming Soon)',
+        'Star Wars: Rogue Squadron (Coming Soon)',
+        'Spider-Man: Beyond the Spider-Verse (Coming Soon)',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

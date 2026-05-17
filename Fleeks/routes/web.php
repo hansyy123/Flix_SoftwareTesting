@@ -45,6 +45,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::resource('/rooms', AdminRoomController::class)->except(['show']);
 
     Route::get('/reservations/pending', [PendingReservationsController::class, 'index'])->name('reservations.pending');
+    Route::get('/reservations/{reservation}/proof', [PendingReservationsController::class, 'proof'])->name('reservations.proof');
     Route::post('/reservations/{reservation}/approve', [PendingReservationsController::class, 'approve'])->name('reservations.approve');
     Route::post('/reservations/{reservation}/reject', [PendingReservationsController::class, 'reject'])->name('reservations.reject');
 });

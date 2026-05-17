@@ -15,7 +15,8 @@ class StoreReservationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'movie_title' => ['required', 'string', 'max:255'],
+            'movie_title' => ['required', 'string', Rule::in(array_merge(config('app.movies'), ['other']))],
+            'manual_movie_title' => ['required_if:movie_title,other', 'nullable', 'string', 'max:255'],
             'starts_at' => ['required', 'date', 'after:now'],
             'ends_at' => ['required', 'date', 'after:starts_at'],
             'payment_method' => ['required', Rule::in(['cash', 'gcash', 'bank_transfer'])],
